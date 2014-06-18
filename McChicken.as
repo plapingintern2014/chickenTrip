@@ -15,7 +15,6 @@
 		
 		public function loop(e:Event):void {
 			e.target.y += speed;
-			speed += 1;
 		}
 			/*
 			if(stage.contains(mcChicken)){
