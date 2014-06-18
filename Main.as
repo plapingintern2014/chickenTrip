@@ -9,15 +9,19 @@
 		private var mcChicken:McChicken;
 		private var isDown:Boolean = false;
 		
+		private var mcGrass:McGrass;
+		
 		private var mcEgg:McEgg;
 		private var i:uint = 0;
-		private var speedX:int = 3;
+		private var speedX:int = 5;
 		private var num:uint = 3;
 		private var eggs:Array;
 		
 		public function Main() {
 			mcChicken = new McChicken();
 			this.addChild(mcChicken);
+			mcGrass = new McGrass();
+			this.addChild(mcGrass);
 			
 			eggs = new Array();
 			for(i = 0; i < num; i++)	{
@@ -30,16 +34,30 @@
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onUp);
 			
-			if(!mcChicken.hasEventListener(Event.ENTER_FRAME)) {
+			/*if(!mcChicken.hasEventListener(Event.ENTER_FRAME)) {
 				trace("ficlk");
 				this.removeChild(mcChicken);
-			}
+			}*/
 		}
 		
 		public function loop(e:Event)	: void	{
-			for(i = 0; i < eggs.length; i++)	{
-				eggs[i].update();
-			}
+			
+				for(i = 0; i < eggs.length; i++)	{
+					eggs[i].update();
+				}
+				
+				/*if(mcChicken.hitTestObject(mcEgg)) {
+					this.removeChild(mcEgg);
+				}*/
+				
+				if(this.contains(mcChicken)) {
+					if(mcChicken.hitTestObject(mcGrass)) {
+						   mcChicken.death();
+					   	this.removeChild(mcChicken);
+					}
+					
+				}
+			
 		}
 		
 		private function onDown(e:KeyboardEvent):void {
@@ -59,10 +77,18 @@
 				break;
 			}
 			
+			if(mcChicken.y > (400 - (mcChicken.height / 2))) {
+				if(this.contains(mcChicken)) {
+					mcChicken.death();
+					this.removeChild(mcChicken);
+				}
+			}
+			
 			
 		}
 		
 		private function onUp(e:KeyboardEvent):void {
+			
 			switch(e.keyCode) {
 				case 38 : {
 					isDown = false;

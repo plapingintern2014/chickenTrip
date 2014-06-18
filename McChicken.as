@@ -27,6 +27,10 @@
 					this.removeEventListener(Event.ENTER_FRAME, loop);
 				}*/
 		}
+		
+		public function death():void {
+			this.removeEventListener(Event.ENTER_FRAME, loop);
+		}
 	}
 	
 }
