@@ -9,12 +9,32 @@
 		private var mcChicken:McChicken;
 		private var isDown:Boolean = false;
 		
+		private var mcEgg:McEgg;
+		private var i:uint = 0;
+		private var speedX:int = 5;
+		private var num:uint = 3;
+		private var eggs:Array;
+		
 		public function Main() {
 			mcChicken = new McChicken();
 			this.addChild(mcChicken);
 			
+			eggs = new Array();
+			for(i = 0; i < num; i++)	{
+				mcEgg = new McEgg(i, this.speedX);
+				eggs.push(mcEgg);
+				this.addChild(mcEgg);
+			}
+			stage.addEventListener(Event.ENTER_FRAME, loop);
+			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onUp);
+		}
+		
+		public function loop(e:Event)	: void	{
+			for(i = 0; i < eggs.length; i++)	{
+				eggs[i].update();
+			}
 		}
 		
 		private function onDown(e:KeyboardEvent):void {
