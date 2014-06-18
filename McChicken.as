@@ -19,14 +19,13 @@
 				speed ++;
 			}
 			if(this.y < 0 + (this.height / 2)) {
-				
-					var hitSpeed = speed;
-					speed = -hitSpeed;
-					speed = 2.5;
-					
-					
-				
+				var hitSpeed = speed;
+				speed = -hitSpeed;
+				speed = 2.5;
 			}
+				/*if(this.y >= 400 - (this.height / 2)) {
+					this.removeEventListener(Event.ENTER_FRAME, loop);
+				}*/
 		}
 	}
 	

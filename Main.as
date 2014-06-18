@@ -29,6 +29,11 @@
 			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onUp);
+			
+			if(!mcChicken.hasEventListener(Event.ENTER_FRAME)) {
+				trace("ficlk");
+				this.removeChild(mcChicken);
+			}
 		}
 		
 		public function loop(e:Event)	: void	{
@@ -41,6 +46,12 @@
 			switch(e.keyCode) {
 				case 38 : {
 					isDown = true;
+					if(mcChicken.y < 0 + (mcChicken.height / 2)) {
+						stage.removeEventListener(KeyboardEvent.KEY_DOWN, onDown);
+					}
+					else {
+						stage.addEventListener(KeyboardEvent.KEY_DOWN, onDown);
+					}
 					if(mcChicken.speed > -10) {
 						mcChicken.speed -= 2.0;
 					}
