@@ -11,7 +11,7 @@
 		
 		private var mcEgg:McEgg;
 		private var i:uint = 0;
-		private var speedX:int = 5;
+		private var speedX:int = 3;
 		private var num:uint = 3;
 		private var eggs:Array;
 		
