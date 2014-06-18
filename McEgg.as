@@ -8,7 +8,7 @@
 
 		public function McEgg(_name : int, speedX: Number) {
 			this.name = "Egg" + _name;
-			this.x = Math.random() * 550;
+			this.x = Math.random() * 550 + 550;
 			this.y = Math.random() * 400;
 			this.speedX = speedX;
 			this.startMove();
@@ -35,8 +35,6 @@
 					this.speedX = -5;
 			}
 		}
-		
-
 	}
 	
 }
