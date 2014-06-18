@@ -5,6 +5,7 @@
 	
 	public class Main extends Sprite{
 
+		//public var speed:int = 5;
 		private var mcChicken:McChicken;
 		private var isDown:Boolean = false;
 		
@@ -20,7 +21,9 @@
 			switch(e.keyCode) {
 				case 38 : {
 					isDown = true;
-					mcChicken.speed = -5;
+					if(mcChicken.speed > -10) {
+						mcChicken.speed -= 2.0;
+					}
 				}
 				break;
 			}
@@ -30,10 +33,16 @@
 			switch(e.keyCode) {
 				case 38 : {
 					isDown = false;
-					mcChicken.speed = 7;
 				} break;
 			}
 		}
+		
+		/*if(stage.contains(mcChicken)){
+			if(e.target.y >= (400 - (e.target.height / 2))){
+				mcChicken.removeEventListener(Event.ENTER_FRAME, loop);
+				this.removeChild(mcChicken);
+			}
+		}*/
 
 	}
 	

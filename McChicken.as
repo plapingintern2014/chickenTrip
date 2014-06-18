@@ -4,25 +4,28 @@
 	
 	public class McChicken extends Sprite {
 		
-		public var speed:int = 5;
+		public var speed:Number = 2.5;
 		
 		public function McChicken() {
-			this.x = 400;
+			this.x = 275;
 			this.y = 200;
 			
 			this.addEventListener(Event.ENTER_FRAME, loop);
 		}
 		
 		public function loop(e:Event):void {
-			e.target.y += speed;
+			this.y += speed;
+			if(speed <= 10) {
+				speed ++;
+			}
+			if(this.y < 0 + (this.height / 2)) {
+				
+					var hitSpeed = speed;
+					speed = -hitSpeed;
+					speed = 2.5;
+				
+			}
 		}
-			/*
-			if(stage.contains(mcChicken)){
-				if(e.target.y >= (400 - (e.target.height / 2))){
-					mcChicken.removeEventListener(Event.ENTER_FRAME, loop);
-					this.removeChild(mcChicken);
-				}
-			}*/
 	}
 	
 }
