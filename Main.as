@@ -15,10 +15,9 @@
 		
 		private var eggs:Array;
 		private var timer:Timer;
-		private var myTime:int = 60;
 		private var i:uint = 0;
 		private var speedX:int = 5;
-		private var num:uint = 3;
+		private var num:uint = 60;
 		private var mcEgg:McEgg;
 		
 		public function Main() {
@@ -28,15 +27,27 @@
 			this.addChild(mcGrass);
 			
 			eggs = new Array();
-			for(i = 0; i < myTime; i++)	{
+			
+			for(i = 0; i < num; i++)	{
 				var random = Math.random();
-				if(random > 0.7)	{
-					mcEgg = new McEgg(this.speedX);
+				if(random > 0.9)	{
+					mcEgg = new McEgg(this.speedX,1);
+					eggs.push(mcEgg);
+					this.addChild(mcEgg);
+				}
+				else if(random > 0.6)	{
+					mcEgg = new McEgg(this.speedX,2);
 					eggs.push(mcEgg);
 					this.addChild(mcEgg);
 				}
 			}
-				stage.addEventListener(Event.ENTER_FRAME, loop);
+			/*
+			for(i = 0; i < num; i++)	{
+					mcEgg = new McEgg(this.speedX);
+					eggs.push(mcEgg);
+					this.addChild(mcEgg);
+			}*/
+			stage.addEventListener(Event.ENTER_FRAME, loop);
 			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onUp);
@@ -49,11 +60,22 @@
 		
 		public function loop(e:Event)	: void	{
 			
-				for(i = 0; i < eggs.length; i++)	{
+				for(i = 0; i < eggs.length; i++){
 					eggs[i].run();
-					if(this.contains(eggs[i])) {
+					if(this.contains(eggs[i])&&this.contains(mcChicken)) {
 						if(mcChicken.hitTestObject(eggs[i])) {
 							this.removeChild(eggs[i]);
+							var random = Math.random();
+							if(random > 0.9)	{
+								mcEgg = new McEgg(this.speedX,1);
+								eggs.push(mcEgg);
+								this.addChild(mcEgg);
+							}
+							else if(random > 0.6)	{
+								mcEgg = new McEgg(this.speedX,2);
+								eggs.push(mcEgg);
+								this.addChild(mcEgg);
+							}
 						}
 					}
 				}
