@@ -8,32 +8,16 @@
 
 		public function McEgg(_name : int, speedX: Number) {
 			this.name = "Egg" + _name;
-			this.x = Math.random() * 550 + 550;
+			this.x = Math.random() * 550 +550;
 			this.y = Math.random() * 400;
 			this.speedX = speedX;
-			this.startMove();
+			this.run();
 		}
 		
-		public function startMove() : void	{
-			this.isStop = false;
-		}
 		
-		public function stopMove() : void	{
-			this.isStop = true;
-		}
-		
-		public function set isStop(t:Boolean) : void	{
-			this._isStop = t;
-		}
-		
-		public function get isStop()	: Boolean	{
-			return this._isStop;
-		}
-		public function update() : void	{
-			if(!this.isStop)	{
+		public function run() : void	{
 				this.x += speedX;
-					this.speedX = -5;
-			}
+				this.speedX = -5;
 		}
 	}
 	
