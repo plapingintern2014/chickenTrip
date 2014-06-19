@@ -31,8 +31,8 @@
 		
 		public function bigChick(){
 			this.timer = new Timer(0,400);
-			trace(this.width);
-			trace(this.height);
+			//trace(this.width);
+			//trace(this.height);
 			this.timer.addEventListener(TimerEvent.TIMER, tick);
 			this.timer.addEventListener(TimerEvent.TIMER_COMPLETE, tock);
 			this.timer.start();

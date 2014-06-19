@@ -128,10 +128,12 @@
 					   //trace("blue");
 					   mcChicken.bigChick();
 					   this.removeChild(specEggs[i]);
-						specEggs.splice(i,1);
+					   specEggs.splice(i,1);
 				   	}
 				   	if(specEggs[i].eggType() === 2){
 					   //trace("red");
+					   this.removeChild(specEggs[i]);
+					   specEggs.splice(i,1);
 				   	}
 				 }
 			}
