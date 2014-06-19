@@ -15,7 +15,7 @@
 		public function createEgg() :void{
 			if(numCase == 1){
 				this.x = -(Math.random() *100);
-				this.y = (Math.random() * 600);
+				this.y = (Math.random() * 400);
 			}
 			else if(numCase == 2){ 
 				this.x = -(Math.random() *100);

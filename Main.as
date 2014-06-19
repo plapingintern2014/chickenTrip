@@ -6,7 +6,10 @@
 	import flash.events.KeyboardEvent;
 	
 	public class Main extends Sprite{
-
+		
+		private var map:Map;
+		private var mapArr:Array;
+		
 		//public var speed:int = 5;
 		private var mcChicken:McChicken;
 		private var isDown:Boolean = false;
@@ -20,7 +23,22 @@
 		private var num:uint = 60;
 		private var mcEgg:McEgg;
 		
+		private var specEggs:Array;
+		private var mcBlueEgg:McBlueEgg;
+		private var mcRedEgg:McRedEgg;
+		private var randomEgg:Number;
+		
 		public function Main() {
+			
+			mapArr = new Array();
+			for(i = 0; i < 2; i++){
+				map = new Map();
+				map.x = 0-(1542*i);
+				map.y = 0;
+				mapArr.push(map);
+				this.addChild(map);
+			}
+			
 			mcChicken = new McChicken();
 			this.addChild(mcChicken);
 			mcGrass = new McGrass();
@@ -41,6 +59,24 @@
 					this.addChild(mcEgg);
 				}
 			}
+			
+			specEggs = new Array();
+			
+			for(i=0; i<num/5; i++){
+				randomEgg = Math.random();
+				if(randomEgg >= 0.5){
+					mcBlueEgg = new McBlueEgg(i);
+					specEggs.push(mcBlueEgg);
+					this.addChild(mcBlueEgg);
+					//trace(mcBlueEgg.x)
+				}else if(randomEgg < 0.5){
+					mcRedEgg = new McRedEgg(i);
+					specEggs.push(mcRedEgg);
+					this.addChild(mcRedEgg);
+					//trace(mcRedEgg.x)
+				}
+			}
+			
 			/*
 			for(i = 0; i < num; i++)	{
 					mcEgg = new McEgg(this.speedX);
@@ -59,6 +95,10 @@
 		}
 		
 		public function loop(e:Event)	: void	{
+				
+				for(i = 0; i<mapArr.length; i++){
+					mapArr[i].update();
+				}
 			
 				for(i = 0; i < eggs.length; i++){
 					eggs[i].run();
@@ -79,6 +119,22 @@
 						}
 					}
 				}
+				
+				for(i = 0; i < specEggs.length; i++)	{
+					specEggs[i].update();
+					if(mcChicken.hitTestObject(specEggs[i])){
+				   	//trace("hit")
+				  	 if(specEggs[i].eggType() === 1){
+					   //trace("blue");
+					   mcChicken.bigChick();
+					   this.removeChild(specEggs[i]);
+						specEggs.splice(i,1);
+				   	}
+				   	if(specEggs[i].eggType() === 2){
+					   //trace("red");
+				   	}
+				 }
+			}
 				
 				if(this.contains(mcChicken)) {
 					if(mcChicken.hitTestObject(mcGrass)) {
