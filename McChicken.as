@@ -21,7 +21,7 @@
 			if(this.y < 0 + (this.height / 2)) {
 				var hitSpeed = speed;
 				speed = -hitSpeed;
-				speed = 2.5;
+				speed += speed;
 			}
 		}
 		
