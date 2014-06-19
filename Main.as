@@ -1,6 +1,8 @@
 ﻿package  {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.utils.Timer;
+	import flash.events.TimerEvent;
 	import flash.events.KeyboardEvent;
 	
 	public class Main extends Sprite{
@@ -11,11 +13,13 @@
 		
 		private var mcGrass:McGrass;
 		
-		private var mcEgg:McEgg;
+		private var eggs:Array;
+		private var timer:Timer;
+		private var myTime:int = 60;
 		private var i:uint = 0;
 		private var speedX:int = 5;
 		private var num:uint = 3;
-		private var eggs:Array;
+		private var mcEgg:McEgg;
 		
 		public function Main() {
 			mcChicken = new McChicken();
@@ -24,12 +28,15 @@
 			this.addChild(mcGrass);
 			
 			eggs = new Array();
-			for(i = 0; i < num; i++)	{
-				mcEgg = new McEgg(i, this.speedX);
-				eggs.push(mcEgg);
-				this.addChild(mcEgg);
+			for(i = 0; i < myTime; i++)	{
+				var random = Math.random();
+				if(random > 0.7)	{
+					mcEgg = new McEgg(this.speedX);
+					eggs.push(mcEgg);
+					this.addChild(mcEgg);
+				}
 			}
-			stage.addEventListener(Event.ENTER_FRAME, loop);
+				stage.addEventListener(Event.ENTER_FRAME, loop);
 			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onUp);

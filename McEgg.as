@@ -6,9 +6,8 @@
 		private var speedX:Number;
 		private var _isStop:Boolean;
 
-		public function McEgg(_name : int, speedX: Number) {
-			this.name = "Egg" + _name;
-			this.x = Math.random() * 550 +550;
+		public function McEgg(speedX: Number) {
+			this.x = (Math.random() * 550) + (Math.random() *1000);
 			this.y = Math.random() * 400;
 			this.speedX = speedX;
 			this.run();
