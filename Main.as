@@ -44,11 +44,12 @@
 			
 				for(i = 0; i < eggs.length; i++)	{
 					eggs[i].update();
+					if(this.contains(eggs[i])) {
+						if(mcChicken.hitTestObject(eggs[i])) {
+							this.removeChild(eggs[i]);
+						}
+					}
 				}
-				
-				/*if(mcChicken.hitTestObject(mcEgg)) {
-					this.removeChild(mcEgg);
-				}*/
 				
 				if(this.contains(mcChicken)) {
 					if(mcChicken.hitTestObject(mcGrass)) {
@@ -78,6 +79,7 @@
 			}
 			
 			if(mcChicken.y > (400 - (mcChicken.height / 2))) {
+				trace("death");
 				if(this.contains(mcChicken)) {
 					mcChicken.death();
 					this.removeChild(mcChicken);
