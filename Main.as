@@ -5,7 +5,7 @@
 	
 	public class Main extends Sprite{
 
-		//public var speed:int = 5;
+		private var speed:int = 5;
 		private var mcChicken:McChicken;
 		private var isDown:Boolean = false;
 		
@@ -34,30 +34,29 @@
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onUp);
 			
-			/*if(!mcChicken.hasEventListener(Event.ENTER_FRAME)) {
-				trace("ficlk");
-				this.removeChild(mcChicken);
-			}*/
 		}
 		
-		public function loop(e:Event)	: void	{
+		public function loop(e:Event) : void {
+			trace(mcChicken.speed);
+			for(i = 0; i < eggs.length; i++) {
+				eggs[i].update();
+				if(this.contains(eggs[i])) {
+					if(mcChicken.hitTestObject(eggs[i])) {
+						this.removeChild(eggs[i]);
+					}
+				}
+			}
 			
-				for(i = 0; i < eggs.length; i++)	{
-					eggs[i].update();
-					if(this.contains(eggs[i])) {
-						if(mcChicken.hitTestObject(eggs[i])) {
-							this.removeChild(eggs[i]);
-						}
-					}
+			if(this.contains(mcChicken)) {
+				if(mcChicken.hitTestObject(mcGrass)) {
+					mcChicken.death();
+					this.removeChild(mcChicken);
 				}
-				
-				if(this.contains(mcChicken)) {
-					if(mcChicken.hitTestObject(mcGrass)) {
-						   mcChicken.death();
-					   	this.removeChild(mcChicken);
+			}
+			
+					if(mcChicken.y < 0 + (mcChicken.height / 2)) {
+						this.removeEventListener(KeyboardEvent.KEY_DOWN, onDown);
 					}
-					
-				}
 			
 		}
 		
@@ -65,28 +64,13 @@
 			switch(e.keyCode) {
 				case 38 : {
 					isDown = true;
-					if(mcChicken.y < 0 + (mcChicken.height / 2)) {
-						stage.removeEventListener(KeyboardEvent.KEY_DOWN, onDown);
-					}
-					else {
-						stage.addEventListener(KeyboardEvent.KEY_DOWN, onDown);
-					}
+					
 					if(mcChicken.speed > -10) {
 						mcChicken.speed -= 2.0;
 					}
 				}
 				break;
 			}
-			
-			if(mcChicken.y > (400 - (mcChicken.height / 2))) {
-				trace("death");
-				if(this.contains(mcChicken)) {
-					mcChicken.death();
-					this.removeChild(mcChicken);
-				}
-			}
-			
-			
 		}
 		
 		private function onUp(e:KeyboardEvent):void {
@@ -98,12 +82,6 @@
 			}
 		}
 		
-		/*if(stage.contains(mcChicken)){
-			if(e.target.y >= (400 - (e.target.height / 2))){
-				mcChicken.removeEventListener(Event.ENTER_FRAME, loop);
-				this.removeChild(mcChicken);
-			}
-		}*/
 
 	}
 	

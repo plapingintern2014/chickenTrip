@@ -23,9 +23,6 @@
 				speed = -hitSpeed;
 				speed = 2.5;
 			}
-				/*if(this.y >= 400 - (this.height / 2)) {
-					this.removeEventListener(Event.ENTER_FRAME, loop);
-				}*/
 		}
 		
 		public function death():void {
