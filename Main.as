@@ -43,7 +43,7 @@
 		public function loop(e:Event)	: void	{
 			
 				for(i = 0; i < eggs.length; i++)	{
-					eggs[i].update();
+					eggs[i].run();
 					if(this.contains(eggs[i])) {
 						if(mcChicken.hitTestObject(eggs[i])) {
 							this.removeChild(eggs[i]);
