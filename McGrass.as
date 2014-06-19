@@ -5,7 +5,7 @@
 
 		public function McGrass() {
 			this.x = 275;
-			this.y = 400;
+			this.y = 560;
 		}
 
 	}

@@ -14,22 +14,23 @@
 		}
 		public function createEgg() :void{
 			if(numCase == 1){
-				this.x = 600 + (Math.random() *1000);
-				this.y = (Math.random() * 100)+300;
+				this.x = -(Math.random() *100);
+				this.y = (Math.random() * 600);
 			}
 			else if(numCase == 2){ 
-				this.x = 600 + (Math.random() *1000);
-				this.y = Math.random() * 100;
+				this.x = -(Math.random() *100);
+				this.y = Math.random() * 600;
+				
 			}
 		}
 		
 		public function run() : void	{
-			if(this.x<=0){
+			if(this.x>=1200){
 				this.createEgg();
 			}
 			else{
 				this.x += speedX;
-				this.speedX = -5;
+				this.speedX = 5;
 			}
 		}
 	}
