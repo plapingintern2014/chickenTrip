@@ -1,10 +1,10 @@
 ﻿package  {
-	import flash.display.Sprite;
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
 	
-	public class McChicken extends Sprite {
+	public class McChicken extends MovieClip {
 		
 		public var speed:Number = 2.5;
 		private var timer:Timer;
