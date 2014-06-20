@@ -33,6 +33,10 @@
 				this.speedX = 5;
 			}
 		}
+		
+		public function getType() : Boolean {
+			return true;
+		}
 	}
 	
 }

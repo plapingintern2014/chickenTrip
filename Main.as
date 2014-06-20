@@ -22,11 +22,15 @@
 		private var speedX:int = 5;
 		private var num:uint = 60;
 		private var mcEgg:McEgg;
+		private var mcGoldEgg:McGoldEgg;
 		
 		private var specEggs:Array;
 		private var mcBlueEgg:McBlueEgg;
 		private var mcRedEgg:McRedEgg;
 		private var randomEgg:Number;
+		
+		private var score:int = 0;
+		private var txtScoreBoard:TxtScoreBoard;
 		
 		public function Main() {
 			
@@ -39,24 +43,37 @@
 				this.addChild(map);
 			}
 			
+			
+			
 			mcChicken = new McChicken();
 			this.addChild(mcChicken);
 			mcGrass = new McGrass();
 			this.addChild(mcGrass);
 			
+			
+			txtScoreBoard = new TxtScoreBoard();
+			this.addChild(txtScoreBoard);
+			
 			eggs = new Array();
 			
 			for(i = 0; i < num; i++)	{
-				var random = Math.random();
-				if(random > 0.9)	{
-					mcEgg = new McEgg(this.speedX,1);
-					eggs.push(mcEgg);
-					this.addChild(mcEgg);
-				}
-				else if(random > 0.6)	{
-					mcEgg = new McEgg(this.speedX,2);
-					eggs.push(mcEgg);
-					this.addChild(mcEgg);
+				var randomType = Math.random();
+				if(randomType > 0.1) {
+					var random = Math.random();
+					if(random > 0.9)	{
+						mcEgg = new McEgg(this.speedX,1);
+						eggs.push(mcEgg);
+						this.addChild(mcEgg);
+					}
+					else if(random > 0.6)	{
+						mcEgg = new McEgg(this.speedX,2);
+						eggs.push(mcEgg);
+						this.addChild(mcEgg);
+					}
+				} else {
+					mcGoldEgg = new McGoldEgg(this.speedX);
+					eggs.push(mcGoldEgg);
+					this.addChild(mcGoldEgg);
 				}
 			}
 			
@@ -103,18 +120,31 @@
 				for(i = 0; i < eggs.length; i++){
 					eggs[i].run();
 					if(this.contains(eggs[i])&&this.contains(mcChicken)) {
-						if(mcChicken.hitTestObject(eggs[i])) {
-							this.removeChild(eggs[i]);
-							var random = Math.random();
-							if(random > 0.9)	{
-								mcEgg = new McEgg(this.speedX,1);
-								eggs.push(mcEgg);
-								this.addChild(mcEgg);
+						if(eggs[i].getType()) {
+							if(mcChicken.hitTestObject(eggs[i])) {
+								score ++;
+								txtScoreBoard.setScore(score);
+								this.removeChild(eggs[i]);
+								var random = Math.random();
+								if(random > 0.9)	{
+									mcEgg = new McEgg(this.speedX,1);
+									eggs.push(mcEgg);
+									this.addChild(mcEgg);
+								}
+								else if(random > 0.6)	{
+									mcEgg = new McEgg(this.speedX,2);
+									eggs.push(mcEgg);
+									this.addChild(mcEgg);
+								}
 							}
-							else if(random > 0.6)	{
-								mcEgg = new McEgg(this.speedX,2);
-								eggs.push(mcEgg);
-								this.addChild(mcEgg);
+						} else {
+							if(mcChicken.hitTestObject(eggs[i])) {
+								this.removeChild(eggs[i]);
+								score += 10;
+								txtScoreBoard.setScore(score);
+								mcGoldEgg = new McGoldEgg(this.speedX);
+								eggs.push(mcGoldEgg);
+								this.addChild(mcGoldEgg);
 							}
 						}
 					}
@@ -129,14 +159,14 @@
 					   mcChicken.bigChick();
 					   this.removeChild(specEggs[i]);
 					   specEggs.splice(i,1);
-				   	}
-				   	if(specEggs[i].eggType() === 2){
+				   	 }
+				   	 if(specEggs[i].eggType() === 2){
 					   //trace("red");
 					   this.removeChild(specEggs[i]);
 					   specEggs.splice(i,1);
-				   	}
-				 }
-			}
+				   	 }
+				 	}
+				}
 				
 				if(this.contains(mcChicken)) {
 					if(mcChicken.hitTestObject(mcGrass)) {
