@@ -4,8 +4,8 @@
 	public class McGrass extends Sprite{
 
 		public function McGrass() {
-			this.x = 275;
-			this.y = 560;
+			this.x = 771;
+			this.y = 535;
 		}
 
 	}

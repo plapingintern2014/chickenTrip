@@ -31,7 +31,7 @@
 		public function Main() {
 			
 			mapArr = new Array();
-			for(i = 0; i < 2; i++){
+			for(i = 0; i < 4; i++){
 				map = new Map();
 				map.x = 0-(1542*i);
 				map.y = 0;
