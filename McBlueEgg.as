@@ -7,7 +7,7 @@
 
 		public function McBlueEgg(dir:int) {
 			this.x = -(Math.random() *200)*(dir+1);
-			this.y = (Math.random() * 400);
+			this.y = (Math.random() * 600)-135;
 		}
 		
 		public function update():void{

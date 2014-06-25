@@ -32,6 +32,16 @@
 		private var score:int = 0;
 		private var txtScoreBoard:TxtScoreBoard;
 		
+		//obstacle
+		private var cloud:Cloud;
+		private var forkSpoonArray:Array;
+		private var spoon:Spoon;
+		private var fork:Fork;
+		private var ranForkSpoon:int=1;
+		private var snake:Snake;
+		private var checkSnake:int=1;
+
+		
 		public function Main() {
 			
 			mapArr = new Array();
@@ -94,14 +104,28 @@
 				}
 			}
 			
+			//ostacle
+			cloud = new Cloud(this.speedX);
+			this.addChild(cloud);
+			
+			spoon = new Spoon(this.speedX);
+			spoon.x=1000;
+			this.addChild(spoon);
+			
+			fork = new Fork(this.speedX);
+			this.addChild(fork);
+			
+			snake = new Snake();
+			
+			
 			/*
 			for(i = 0; i < num; i++)	{
 					mcEgg = new McEgg(this.speedX);
 					eggs.push(mcEgg);
 					this.addChild(mcEgg);
 			}*/
-			stage.addEventListener(Event.ENTER_FRAME, loop);
 			
+			stage.addEventListener(Event.ENTER_FRAME, loop);
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onDown);
 			stage.addEventListener(KeyboardEvent.KEY_UP, onUp);
 			
@@ -111,7 +135,7 @@
 			}*/
 		}
 		
-		public function loop(e:Event)	: void	{
+		public function loop(e:Event): void	{
 				
 				for(i = 0; i<mapArr.length; i++){
 					mapArr[i].update();
@@ -175,7 +199,25 @@
 					}
 					
 				}
+			//cloud
+			cloud.update();
 			
+			//forkAndSpoon
+			fork.update();
+			
+			spoon.update();
+			
+			//snake
+			if(stage.mouseY >= 450 && checkSnake===1){
+				this.addChild(snake);
+				snake.y = 600;
+				snake.x = stage.mouseX;
+				snake.snakeStatus(1);
+				checkSnake=0;
+			}
+			
+			snake.update();
+
 		}
 		
 		private function onDown(e:KeyboardEvent):void {

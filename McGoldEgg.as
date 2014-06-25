@@ -16,7 +16,7 @@
 		
 		public function create(): void {
 			this.x = - (Math.random() * 400);
-			this.y = Math.random() * 600;
+			this.y = Math.random() * 600 -135;
 		}
 		
 		public function run() : void {
